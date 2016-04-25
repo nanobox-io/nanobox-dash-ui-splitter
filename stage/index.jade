@@ -1,0 +1,44 @@
+doctype html
+html(lang="en")
+  
+  head
+    title Splitter
+
+    // build:remove 
+    link(href="stage/css/stage.css", rel="stylesheet")
+    link(href="bower-libs/scale-machine/rel/style.css", rel="stylesheet")
+    // endbuild
+    
+    // build:css style.css
+    link(href="css/main.css", rel="stylesheet")
+    link(href="css/splitter-svg.css", rel="stylesheet")
+    // endbuild
+
+  body
+    .holder
+    // build:remove 
+    script(src="bower-libs/jquery/dist/jquery.js")
+    script(src="bower-libs/shadow-icons/rel/app.js")
+    script(src="bower-libs/jade/runtime.js")
+    script(src="bower-libs/scale-machine/rel/app.js")
+    script(src="bower-libs/scale-machine/rel/data-shim.js")
+    script(src="bower-libs/PubSubJS/src/pubsub.js")
+    script(src="https://use.typekit.net/cqd5kth.js")
+    // endbuild
+    
+    script(type="text/javascript") try{Typekit.load({ async: true });}catch(e){}
+
+    // build:js app.js
+    script(src="js/main.js")
+    script(src="js/splitter-svg.js")
+    // endbuild
+    
+    // build:remove 
+    script(src="stage/js/stage.js")
+    // endbuild
+    
+    
+    
+    // build:remove 
+    script(src="http://localhost:35729/livereload.js")
+    // endbuild

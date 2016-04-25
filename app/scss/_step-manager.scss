@@ -1,0 +1,29 @@
+.step-manager   { background:#E8E8E8; position: relative;
+  .step-wrapper { position:relative; height: 600px; overflow: hidden;
+    .steps      { display: flex; position: absolute;
+      .step     { width:600px; padding:40px; box-sizing: border-box;   flex-shrink: 0;
+        @import 'configuration';
+        @import 'scale';
+        @import 'summary';
+      }
+    }
+  }
+  .step-key     { display:flex; margin:15px 30px; align-items: baseline; border-bottom: solid 1px #CACACA; padding: 20px 0 10px;
+    .step-count { font-style:italic; color: #879EA8; font-size: 13px; margin-right:15px; }
+    .step-title { color:#69737D; text-transform:uppercase; font-weight: bold; font-size:14px; }
+  }
+  .ui           { display: flex; width: 600px; position:absolute; bottom:-25px;
+    > *         { cursor: pointer; }
+    .ui-btn     { display: flex; align-items: center; font-size:13px; font-style: italic; color: #7F8499; margin: 0 10px 0 6px;
+      .txt      { margin-left: 3px; }
+      &.back    { }
+      &.cancel  { }
+    }
+    .btn        { position: absolute; right:-20px; top:-24px;
+      &:after   { content: "Next"; color: white; position: absolute; top: 10px; left:45%; transform: translate(-50%, 0);  }
+      &.submit  {
+        &:after { content: "Submit" }
+      }
+    }
+  }
+}
