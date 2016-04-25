@@ -16,7 +16,6 @@ module.exports = class Sequence
     else
       return false
 
-
   getCurrentItem : () -> @items[ @currentItemIndex ]
   currentItem    : () -> @getCurrentItem()
 

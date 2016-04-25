@@ -1,20 +1,22 @@
-&.configuration       { display:flex; justify-content: space-between;
-  .option             { color:#6B7D85; width: 230px; display:flex; flex-direction:column; align-items: center;
-    &.picked          {
-      .icon           { background:#43A7D1;
-        svg line,
-        polyline      { stroke: #274D69; }
-        .check-icon   {
-          .check-mark { display:initial; }
+&.configuration       {
+  .wrapper            { display:flex; justify-content: space-between; padding:0 30px;
+    .option             { color:#6B7D85; width: 230px; display:flex; flex-direction:column; align-items: center;
+      &.picked          {
+        .icon           { background:#43A7D1;
+          svg line,
+          polyline      { stroke: #274D69; }
+          .check-icon   {
+            .check-mark { display:initial; }
+          }
         }
       }
-    }
-    .icon             { position: relative; background:#BDC9CC; display:flex; align-items: center; justify-content: center; width:174px; height:175px; border-radius:50%; cursor:pointer;
-      .check-icon     { position:absolute; bottom:1px; left:16px;
-        .check-mark   { display:none; }
+      .icon             { position: relative; background:#BDC9CC; display:flex; align-items: center; justify-content: center; width:174px; height:175px; border-radius:50%; cursor:pointer;
+        .check-icon     { position:absolute; bottom:1px; left:16px;
+          .check-mark   { display:none; }
+        }
       }
+      .title            { text-transform: uppercase; font-weight: bold; letter-spacing: 0.04em; border-bottom: 1px solid #CECECE; width: 100%; text-align: center; padding: 4px 0; margin: 24px 0 13px; }
+      .blurb            { font-style: italic; font-weight:$medium;  font-size:14px; line-height: 20px; }
     }
-    .title            { text-transform: uppercase; font-weight: bold; letter-spacing: 0.04em; border-bottom: 1px solid #CECECE; width: 100%; text-align: center; padding: 4px 0; margin: 24px 0 13px; }
-    .blurb            { font-style: italic; font-weight:$medium;  font-size:14px; line-height: 20px; }
   }
 }

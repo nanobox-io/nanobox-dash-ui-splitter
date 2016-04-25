@@ -3,10 +3,10 @@ configuration = require 'jade/configuration'
 module.exports = class Configuration
 
   constructor: ($el) ->
-    $node = $ configuration( {} )
-    $el.append $node
-    castShadows $node
-    @$options = $ '.option', $node
+    @$node = $ configuration( {} )
+    $el.append @$node
+    castShadows @$node
+    @$options = $ '.option', @$node
     $(".icon").on "click", (e)=>
       @onClick $ e.currentTarget
 
@@ -17,3 +17,5 @@ module.exports = class Configuration
 
     @$options.removeClass 'picked'
     $clicked.parent().addClass 'picked'
+
+  getTitle : () -> "Choose a Configuration"
