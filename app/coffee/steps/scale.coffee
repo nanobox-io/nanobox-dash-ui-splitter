@@ -13,6 +13,7 @@ module.exports = class Scale
       @scaleMachine = new nanobox.ScaleMachine $wrapper, "asdf", @onSelectionChange
 
     @scaleMachine.hideInstructions()
+    @scaleMachine.keepHoverInbounds()
 
   onSelectionChange : () ->
   onInstanceTotalChange : () ->
