@@ -8,9 +8,9 @@ module.exports = class Scale
     $wrapper = $ '.wrapper', @$node
 
     if isHorizontallyScalable
-      @scaleMachine = new nanobox.ScaleMachine $wrapper, "asdf", @onSelectionChange, @onInstanceTotalChange, 1
+      @scaleMachine = new nanobox.ScaleMachine $wrapper, 'default', @onSelectionChange, @onInstanceTotalChange, 1
     else
-      @scaleMachine = new nanobox.ScaleMachine $wrapper, "asdf", @onSelectionChange
+      @scaleMachine = new nanobox.ScaleMachine $wrapper, 'default', @onSelectionChange
 
     @scaleMachine.hideInstructions()
     @scaleMachine.keepHoverInbounds()

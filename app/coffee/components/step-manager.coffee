@@ -16,6 +16,10 @@ module.exports = class StepManager
     @$currentStep = $ "#current-step", @$node
     @$stepTitle   = $ ".step-title", @$node
 
+    @initClickHandlers()
+    @initSteps()
+
+  initClickHandlers : () ->
     # Click Events
     $('.forward', @$node).on 'click', ()=>
       @nextStep()
@@ -23,7 +27,7 @@ module.exports = class StepManager
     $('.back', @$node).on 'click',    ()=>
       @previousStep()
 
-    # Init Steps
+  initSteps : () ->
     steps = [
       {klass: Configuration}
       {klass: Scale}
@@ -52,8 +56,8 @@ module.exports = class StepManager
   slideToCurrentStep : ()->
     @$currentStep.text @steps.currentItemIndex+1
     @$stepTitle.text @steps.currentItem().instance.getTitle
-    left = - @steps.currentItem().instance.$node.position().left - 40
-    tall = @steps.currentItem().instance.$node.children().height() + 40
+    left = - @steps.currentItem().instance.$node.position().left
+    tall = @steps.currentItem().instance.$node.children().outerHeight()
     @$wrapper.css height: tall
     me = @
 
