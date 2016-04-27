@@ -2,17 +2,17 @@
   .wrapper
     .option.picked
       .icon(data-id="redundant")
-        img.shadow-icon(data-src="horizontal-cluster")
+        img.shadow-icon(data-src="#{redundantIcon}")
         .check-icon
           img.shadow-icon(data-src="check")
-      .title Horizontal Cluster
-      .blurb Cluster one or more instances of this component. Each instance lives on it’s own server for redundancy and greater performance. 
+      .title=redundantTitle
+      .blurb=redundantBlurb
 
     .option
       .icon(data-id="single")
-        img.shadow-icon(data-src="horizontal-single")
+        img.shadow-icon(data-src="#{singleIcon}")
         .check-icon
           img.shadow-icon(data-src="check")    
-      .title Single
-      .blurb A single instance of this component  installed on a single multi-component server.
+      .title=singleTitle
+      .blurb=singleBlurb
       

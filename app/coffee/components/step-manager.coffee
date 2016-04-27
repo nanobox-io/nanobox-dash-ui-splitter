@@ -7,7 +7,7 @@ stepManager   = require 'jade/step-manager'
 
 module.exports = class StepManager
 
-  constructor: ($el) ->
+  constructor: ($el, @isHorizontal=false) ->
     @$node = $ stepManager( {} )
     $el.append @$node
     @$wrapper = $ '.step-wrapper', @$node
@@ -28,19 +28,15 @@ module.exports = class StepManager
       @previousStep()
 
   initSteps : () ->
-    steps = [
-      {klass: Configuration}
-      {klass: Scale}
-      {klass: Summary}
-    ]
+    @configuration = new Configuration @$steps, @isHorizontal, @onConfigurationChange
+    @scale         = new Scale @$steps, @isHorizontal
+    @summary       = new Summary @$steps, @isHorizontal
+
+    steps = [@configuration, @scale, @summary]
     @steps = new Sequence steps
-    @initStep step for step in steps
+
     @slideToCurrentStep()
     $("#total-steps", @$node).text steps.length
-
-
-  initStep : (obj) ->
-    obj.instance = new obj.klass @$steps
 
   nextStep : () ->
     if @steps.isAtLastItem()
@@ -49,15 +45,18 @@ module.exports = class StepManager
       @steps.next()
       @slideToCurrentStep()
 
+  onConfigurationChange : (config) ->
+    console.log "configuration change : #{config}"
+
   previousStep : () ->
     @steps.prev()
     @slideToCurrentStep()
 
   slideToCurrentStep : ()->
     @$currentStep.text @steps.currentItemIndex+1
-    @$stepTitle.text @steps.currentItem().instance.getTitle
-    left = - @steps.currentItem().instance.$node.position().left
-    tall = @steps.currentItem().instance.$node.children().outerHeight()
+    @$stepTitle.text @steps.currentItem().getTitle()
+    left = - @steps.currentItem().$node.position().left
+    tall = @steps.currentItem().$node.children().outerHeight()
     @$wrapper.css height: tall
     me = @
 

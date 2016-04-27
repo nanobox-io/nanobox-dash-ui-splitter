@@ -1,2 +1,14 @@
 .step.scale
   .wrapper
+    if !isHorizontal
+      .members
+        .member.primary.active
+          img.shadow-icon(data-src="vertical-single")
+          .txt Primary
+        .member.secondary
+          img.shadow-icon(data-src="vertical-single")
+          .txt Secondary
+        .member.monitor
+          img.shadow-icon(data-src="monitor")
+          .txt Monitor
+    .scale-holder
