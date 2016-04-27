@@ -30,13 +30,16 @@ module.exports = class StepManager
   initSteps : () ->
     @configuration = new Configuration @$steps, @isHorizontal, @onConfigurationChange
     @scale         = new Scale @$steps, @isHorizontal
-    @summary       = new Summary @$steps, @isHorizontal
+    @summary       = new Summary @$steps, @isHorizontal, @getPlans
 
     steps = [@configuration, @scale, @summary]
     @steps = new Sequence steps
 
     @slideToCurrentStep()
     $("#total-steps", @$node).text steps.length
+
+  getPlans : () =>
+    @scale.getSelectedPlans()
 
   nextStep : () ->
     if @steps.isAtLastItem()
@@ -53,6 +56,7 @@ module.exports = class StepManager
     @slideToCurrentStep()
 
   slideToCurrentStep : ()->
+    @steps.currentItem().activate()
     @$currentStep.text @steps.currentItemIndex+1
     @$stepTitle.text @steps.currentItem().getTitle()
     left = - @steps.currentItem().$node.position().left

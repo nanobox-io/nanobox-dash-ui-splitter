@@ -1,13 +1,15 @@
 .step.summary
   .wrapper
     .hosts
-      .host
-        .icon
-          img.shadow-icon(data-src="horizontal-cluster")
-        .details
-          .title AWS Instance Specs
-          .specs
-            .spec 1 GB RAM
-            .spec 1 CPU CORE
-            .spec 30 GB SSD DISK
-            .spec $0.04/hr
+      each member, key in members
+        .host
+          .icon
+            img.shadow-icon(data-src="#{member.icon}")
+            .txt=key
+          .details
+            .title AWS Instance Specs
+            .specs
+              .spec #{member.planData.RAM} GB RAM
+              .spec #{member.planData.CPU} CPU CORE
+              .spec #{member.planData.DISK} GB SSD DISK
+              .spec $#{member.planData.dollarsPerHr}/hr

@@ -39,3 +39,4 @@ module.exports = class Configuration
     @configChangeCb @selection
 
   getTitle : () -> "Choose a Configuration"
+  activate : () ->
