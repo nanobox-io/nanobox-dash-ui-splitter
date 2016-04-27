@@ -2,13 +2,13 @@
   .wrapper
     if !isHorizontal
       .members
-        .member.primary.active
+        .member.active(data-id="primary")
           img.shadow-icon(data-src="vertical-single")
           .txt Primary
-        .member.secondary
+        .member(data-id="secondary")
           img.shadow-icon(data-src="vertical-single")
           .txt Secondary
-        .member.monitor
+        .member(data-id="monitor")
           img.shadow-icon(data-src="monitor")
           .txt Monitor
     .scale-holder

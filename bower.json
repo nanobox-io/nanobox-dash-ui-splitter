@@ -1,6 +1,6 @@
 {
   "name": "splitter",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "jquery": "*",
     "velocity": "~1.1.0",

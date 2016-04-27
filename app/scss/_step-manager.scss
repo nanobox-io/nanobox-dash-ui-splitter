@@ -1,6 +1,7 @@
 .step-manager   { position: relative;
-  .step-wrapper { position:relative; overflow: hidden; @include transition(height, 500ms, cubic-bezier(0.840, 0.005, 0.000, 1.000))
-    .steps      { left:0; display: flex; position: absolute; @include transition(left, 500ms, cubic-bezier(0.840, 0.005, 0.000, 1.000))
+  $easing : cubic-bezier(0.840, 0.005, 0.000, 1.000);
+  .step-wrapper { position:relative; overflow: hidden; @include transition(height, 500ms, $easing)
+    .steps      { left:0; display: flex; position: absolute; @include transition(left, 500ms, $easing)
       .step     { width:600px; flex-shrink: 0; margin-right:00px;
         @import 'configuration';
         @import 'scale';
