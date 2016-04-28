@@ -7,7 +7,7 @@ stepManager   = require 'jade/step-manager'
 
 module.exports = class StepManager
 
-  constructor: ($el, @isHorizontal=false) ->
+  constructor: ($el, @isHorizontal=false, @bunkHouses, @submitCb, @cancelCb) ->
     @$node = $ stepManager( {} )
     $el.append @$node
     @$wrapper = $ '.step-wrapper', @$node
@@ -19,37 +19,63 @@ module.exports = class StepManager
     @initClickHandlers()
     @initSteps()
 
+  # ------------------------------------ Initialize
+
   initClickHandlers : () ->
-    # Click Events
     $('.forward', @$node).on 'click', ()=>
-      @nextStep()
+      if !@pickingExistingHost
+        @nextStep()
+      else
+        @submit()
 
     $('.back', @$node).on 'click',    ()=>
       @previousStep()
 
+    $('.cancel', @$node).on 'click',  ()=>
+      @cancelCb()
+
   initSteps : () ->
-    @configuration = new Configuration @$steps, @isHorizontal, @onConfigurationChange
-    @scale         = new Scale @$steps, @isHorizontal
+    @configuration = new Configuration @$steps, @isHorizontal, @bunkHouses, @changeIsExistingBunkhouse
+    @scale         = new Scale @$steps, @isHorizontal, @getConfiguration
     @summary       = new Summary @$steps, @isHorizontal, @getPlans
 
     steps = [@configuration, @scale, @summary]
     @steps = new Sequence steps
 
     @slideToCurrentStep()
-    $("#total-steps", @$node).text steps.length
+    $("#total-steps", @$node).text @steps.totalItems
 
+  # ------------------------------------ Step Data
+  # Retrieving data from various steps,
+  # (usually called by the subsequent step)
+
+  # Get the scale / plan for each member
   getPlans : () =>
     @scale.getSelectedPlans()
 
+  # When the user wants to split onto an existing bunkhouse, we need to
+  # modify the neumber of steps and a few other things..
+  changeIsExistingBunkhouse : (movingToAnExistingBunkhouse) =>
+    if movingToAnExistingBunkhouse
+      $("#total-steps", @$node).text 1
+      @pickingExistingHost = true
+      @$node.addClass "existing-host-pick"
+    else
+      $("#total-steps", @$node).text @steps.totalItems
+      @pickingExistingHost = false
+      @$node.removeClass "existing-host-pick"
+
+  # Retrieve @configuration's data
+  getConfiguration : () =>
+    @configuration.getData()
+
+  # ------------------------------------ Step Navigation
   nextStep : () ->
     if @steps.isAtLastItem()
-      console.log "submit"
+      @submit()
     else
       @steps.next()
       @slideToCurrentStep()
-
-  onConfigurationChange : (config) ->
-    console.log "configuration change : #{config}"
 
   previousStep : () ->
     @steps.prev()
@@ -68,7 +94,6 @@ module.exports = class StepManager
       me.$steps.css left: left
     , 100
 
-
     # If it's the last item, change the next button to submit
     @$node.removeClass 'submit'
     @$node.removeClass 'first'
@@ -77,3 +102,8 @@ module.exports = class StepManager
       @$node.addClass 'submit'
     else if @steps.currentItemIndex == 0
       @$node.addClass 'first'
+
+  # ------------------------------------ Submit
+
+  submit : ()->
+    @submitCb {data:'nothing yet..'}

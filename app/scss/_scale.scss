@@ -1,21 +1,25 @@
-&.scale          {
+&.scale                {
   $blue       : #0096DC;
   $gray       : #98ADB8;
   $arrow-size : 10px;
-  .members       { display:flex; padding-left:30px;
-    > *          { cursor:pointer; margin-right: 50px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-      &:hover    {
-        .txt     { border-bottom: 1px solid rgba($blue, 0.8); margin-bottom:-1px }
+  &.bunkhouse-topology {
+    .slider            { display:none; }
+    .members           { display:none; }
+  }
+  .members             { display:flex; padding-left:30px;
+    > *                { cursor:pointer; margin-right: 50px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      &:hover          {
+        .txt           { border-bottom: 1px solid rgba($blue, 0.8); margin-bottom:-1px }
       }
-      svg *      { stroke: $gray; }
-      .txt       { color: $gray; text-transform: uppercase; font-size: 14px; margin-top:4px; }
-      &.active   { position: relative;
-        svg *    { stroke: $blue; }
-        .txt     { color:$blue; border-bottom: 1px solid rgba($blue, 0.3); margin-bottom:-1px }
-        &:after  { bottom: -25px; left: 50%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; border-color: rgba(136, 183, 213, 0); border-top-color: $blue; border-width: $arrow-size; margin-left: -$arrow-size; }
+      svg *            { stroke: $gray; }
+      .txt             { color: $gray; text-transform: uppercase; font-size: 14px; margin-top:4px; }
+      &.active         { position: relative;
+        svg *          { stroke: $blue; }
+        .txt           { color:$blue; border-bottom: 1px solid rgba($blue, 0.3); margin-bottom:-1px }
+        &:after        { bottom: -25px; left: 50%; border: solid transparent; content: " "; height: 0; width: 0; position: absolute; pointer-events: none; border-color: rgba(136, 183, 213, 0); border-top-color: $blue; border-width: $arrow-size; margin-left: -$arrow-size; }
       }
-      &.complete {
-         svg *   { }
+      &.complete       {
+         svg *         { }
       }
     }
   }

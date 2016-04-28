@@ -29,6 +29,7 @@
   }
 
   // Change the next button to 'submit' but adding .submit class
+  &.existing-host-pick .ui,
   &.submit .ui  {
     .btn:after  { content: "Submit" }
   }

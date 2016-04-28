@@ -1,5 +1,6 @@
-&.configuration       {
-  .wrapper            { display:flex; justify-content: space-between; padding:20px 30px;
+&.configuration         {
+  @mixin text           { font-style: italic; font-weight:$medium;  font-size:14px; line-height: 20px; }
+  .wrapper              { display:flex; justify-content: space-between; padding:20px 30px;
     .option             { color:#6B7D85; width: 230px; display:flex; flex-direction:column; align-items: center;
       &.picked          {
         .icon           { background:#43A7D1;
@@ -16,7 +17,17 @@
         }
       }
       .title            { text-transform: uppercase; font-weight: bold; letter-spacing: 0.04em; border-bottom: 1px solid #CECECE; width: 100%; text-align: center; padding: 4px 0; margin: 24px 0 13px; }
-      .blurb            { font-style: italic; font-weight:$medium;  font-size:14px; line-height: 20px; }
+      .blurb            { @include text; }
+    }
+    .radios             { align-self: flex-start; padding: 15px 0 25px;
+      &.inactive        { opacity:0.5; pointer-events: none; }
+      ul                { list-style: none; margin:0; padding:0;
+        li              { @include text; margin:0 0 3px; padding:0; display:flex; font-size:13px;
+          input         { margin-right:7px; }
+          .txt          {  }
+          select        { margin-left:7px; width:70px; }
+        }
+      }
     }
   }
 }

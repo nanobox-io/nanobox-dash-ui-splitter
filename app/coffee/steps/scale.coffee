@@ -1,26 +1,21 @@
 scale = require 'jade/scale'
 
-# Super important!
-# https://www.youtube.com/watch?v=OVcwNoZdDko
-
 module.exports = class Scale
 
-  constructor: ($el, @isHorizontallyScalable) ->
+  constructor: ($el, @isHorizontallyScalable, @getConfiguration) ->
     @$node = $ scale( {isHorizontal: @isHorizontallyScalable} )
     $el.append @$node
     $scaleHolder = $ '.scale-holder', @$node
 
+    @memberData = {
+      primary : {}
+    }
+
     if @isHorizontallyScalable
       @scaleMachine = new nanobox.ScaleMachine $scaleHolder, 'default', @onSelectionChange, @onInstanceTotalChange, 1
-      @instanceData = {}
     else
       @scaleMachine = new nanobox.ScaleMachine $scaleHolder, 'default', @onSelectionChange
       @initMemberEvents()
-      @memberData = {
-        primary   : {}
-        secondary : {}
-        monitor   : {}
-      }
 
     @scaleMachine.hideInstructions()
     @scaleMachine.keepHoverInbounds()
@@ -32,17 +27,21 @@ module.exports = class Scale
     @$members.on 'click', (e)=>
       $currentTarget = $(e.currentTarget)
       @activeMember = $currentTarget.attr 'data-id'
-      @$members.removeClass 'active'
-      $currentTarget.addClass 'active'
+      @visuallyActivateMemberBtn $currentTarget
       # If this is the secondary unit, and the user has not picked a secondary scale
       if @activeMember == "secondary" && !@memberData.secondary.userHasSpecified
         @memberData.secondary.planId = @memberData.primary.planId
 
       @scaleMachine.refresh @memberData[@activeMember].planId
 
+  visuallyActivateMemberBtn : ($newBtn) ->
+    @$members?.removeClass 'active'
+    $newBtn?.addClass 'active'
+
   onSelectionChange : (planId) =>
-    if @isHorizontallyScalable
-      @instanceData.planId = planId
+    if @isHorizontallyScalable || @serverConfig.topology == 'bunkhouse'
+      @memberData.primary.planId   = planId
+      @memberData.primary.planData = @scaleMachine.getPlanData planId
     else
       @memberData[@activeMember].planId   = planId
       @memberData[@activeMember].planData = @scaleMachine.getPlanData planId
@@ -57,21 +56,47 @@ module.exports = class Scale
   onInstanceTotalChange : () ->
 
   getSelectedPlans : () ->
-    if @isHorizontallyScalable
-      return @instanceData
 
-    else
-      # Make sure there is a plan for each member
-      for key, member of @memberData
-        if !member.planId?
-          member.planId   = @scaleMachine.getDefaultPlan()
-          member.planData = @scaleMachine.getPlanData member.planId
-      return @memberData
+    # This is a bunkhouse
+    if @serverConfig.topology == 'bunkhouse'
+      @visuallyActivateMemberBtn $(".member[data-id='primary']")
+      delete @memberData.secondary
+      delete @memberData.monitor
+
+    # This is a db component..
+    else if !@isHorizontallyScalable
+      # If a secondary plan was not specified, use the primary's data
+      if !@memberData.secondary.planData? && !@memberData.secondary.userHasSpecified
+        @memberData.secondary.planId   = @memberData.primary.planId
+        @memberData.secondary.planData = @memberData.primary.planData
+
+    # Make sure there is a plan for each member
+    for key, member of @memberData
+      if !member.planId?
+        member.planId   = @scaleMachine.getDefaultPlan()
+        member.planData = @scaleMachine.getPlanData member.planId
+
+    return @memberData
 
   getTitle : () ->
+    if @serverConfig.topology == 'bunkhouse'
+      return 'Choose a scale for a new multi-component VM'
     if @isHorizontallyScalable
       return "Choose a VM size and number of instances"
     else
       return "Configure the scale for each cluster member"
 
   activate : () ->
+    @serverConfig = @getConfiguration()
+
+    if @serverConfig.topology == 'bunkhouse'
+      @$node.addClass 'bunkhouse-topology'
+      @scaleMachine.refresh @memberData.primary.planId, false
+
+    else
+      @$node.removeClass 'bunkhouse-topology'
+      if !@isHorizontallyScalable
+        if !@memberData.secondary?
+          @memberData.secondary = {}
+          @memberData.monitor   = {}
+        @scaleMachine.refresh @memberData[$('.member.active', @$node).attr 'data-id'].planId, false
