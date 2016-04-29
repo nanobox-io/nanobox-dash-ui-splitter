@@ -6,7 +6,8 @@
     .slider            { display:none; }
     .members           { display:none; }
   }
-  .members             { display:flex; padding-left:30px;
+  .scale-holder        { padding:15px 0;  }
+  .members             { display:flex; padding-left:30px; margin:15px 0 -20px 0;
     > *                { cursor:pointer; margin-right: 50px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
       &:hover          {
         .txt           { border-bottom: 1px solid rgba($blue, 0.8); margin-bottom:-1px }

@@ -9,28 +9,29 @@
       }
     }
   }
-  .step-key     { display:flex; margin:15px 30px; align-items: baseline; border-bottom: solid 1px #CACACA; padding: 20px 0 10px;
-    .step-count { font-style:italic; color: #879EA8; font-size: 13px; margin-right:15px; }
-    .step-title { color:#69737D; text-transform:uppercase; font-weight: bold; font-size:14px; }
-  }
-  .ui           { display: flex; width: 600px; position:absolute; bottom:-25px;
-    > *         { cursor: pointer; }
-    .ui-btn     { display: flex; align-items: center; font-size:13px; font-style: italic; color: #7F8499; margin: 0 10px 0 6px;
-      .txt      { margin-left: 3px; }
-      &.back    { }
-      &.cancel  { }
+  .step-key     { background:#BDC9CC; display:flex; border-bottom: solid 1px #CACACA;  height:38px; align-items: center; padding-left: 20px;
+    .step-count { font-style:italic; color: white; font-size: 13px; margin-right:15px; text-transform: uppercase;
+      &:after   { content: " : "}
     }
-    .btn        { position: absolute; right:-20px; top:-24px;
+    .step-title { color:#69737D; text-transform:uppercase; font-weight: bold; font-size:14px; }
+    .ui-btn     { margin-left:auto; }
+  }
+  .ui           { display: flex; width: 100%; background: #EDEDED; height:36px; justify-content: flex-end;
+    .btn        { position: relative; margin-right:-18px;
       &:after   { content: "Next"; color: white; position: absolute; top: 10px; left:45%; transform: translate(-50%, 0);  }
     }
   }
   &.first .ui   {
     .back       { display: none; }
   }
-
+  .ui-btn     { cursor: pointer; display: flex; align-items: center; font-size:13px; font-style: italic; color: #7F8499; margin: 0 10px 0 6px;
+    .txt      { margin-left: 3px; }
+    &.back    { margin-right: 17px;  }
+    &.cancel  { }
+  }
   // Change the next button to 'submit' but adding .submit class
   &.existing-host-pick .ui,
   &.submit .ui  {
-    .btn:after  { content: "Submit" }
+    .btn:after  { content: "Submit"; cursor: pointer; }
   }
 }
