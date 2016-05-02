@@ -105,4 +105,8 @@ module.exports = class StepManager
   # ------------------------------------ Submit
 
   submit : ()->
-    @submitCb {data:'nothing yet..'}
+    data =
+      plans  : @scale.getSelectedPlans()
+      config : @configuration.getData()
+
+    @submitCb data

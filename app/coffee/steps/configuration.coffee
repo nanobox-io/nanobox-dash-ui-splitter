@@ -42,11 +42,17 @@ module.exports = class Configuration
     return obj
 
   getData : () ->
-    {
+    obj = {
       topology         : @selection
       isNewServer      : $("input[name='bunkhaus']:checked", @$node).val() == 'new'
-      existingServerId : $("select", @$node).val()
+      isBunkhouse      : @selection == 'bunkhouse'
     }
+
+    # I it is being split onto an existing server, save that id
+    if obj.isBunkhouse && !obj.isNewServer
+      obj.existingServerId = $("select", @$node).val()
+
+    return obj
 
 
   onCategoryChange : ($clicked) ->

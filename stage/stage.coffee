@@ -5,7 +5,7 @@ bunkHouses = [
   {id:"bh2", name:"EC2 2"}
 ]
 
-isHorizontal = false
+isHorizontal = true
 
 onCancel = ()->
   console.log "canceling.."
