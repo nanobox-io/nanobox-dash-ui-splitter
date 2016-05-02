@@ -11,6 +11,7 @@
 	.st5{fill:#274D69;}
 	.st6{fill:#43A7D1;}
 	.st7{fill:none;stroke:#274D69;stroke-miterlimit:10;}
+	.st8{fill:none;stroke:#274D69;stroke-width:3;stroke-miterlimit:10;}
 </style>
 <g id="horizontal-single_x60_44x53">
 	<polyline class="st0" points="31.765,7.544 11.965,18.944 11.965,44.044 	"/>
@@ -137,8 +138,8 @@
 		c0.2,0,0.4,0,0.6,0.1c0.2,0.1,0.4,0.2,0.5,0.4s0.3,0.3,0.4,0.6c0.1,0.2,0.1,0.4,0.1,0.6c0,0.2,0,0.4-0.1,0.6
 		c-0.1,0.2-0.2,0.4-0.4,0.6L13,18.8c-0.2,0.2-0.3,0.3-0.5,0.4C12.3,19.2,12.1,19.2,11.9,19.2z"/>
 </g>
-<g id="next-btn_x60_81x37">
-	<polygon class="st6" points="68.994,0 0,0 0,36 68.994,36 80.183,18 	"/>
+<g id="next-btn_x60_81x36">
+	<polygon class="st6" points="69,0 0,0 0,36 69,36 80.2,18 	"/>
 </g>
 <g id="cancel-x_x60_12x12">
 	<line class="st7" x1="0.354" y1="0.354" x2="10.954" y2="10.954"/>
@@ -154,5 +155,9 @@
 	<polyline class="st3" points="11.3,1.059 11.3,3.759 11.3,6.659 	"/>
 	<polyline class="st2" points="21.7,7.059 11.3,13.259 1,7.059 	"/>
 	<polygon class="st2" points="21.7,17.459 11.3,23.659 1,17.459 1,7.059 11.3,0.859 21.7,7.059 	"/>
+</g>
+<g id="instance-multiply_x60_23x23">
+	<line class="st8" x1="1.061" y1="1.061" x2="21.698" y2="21.698"/>
+	<line class="st8" x1="21.698" y1="1.061" x2="1.061" y2="21.698"/>
 </g>
 </svg>

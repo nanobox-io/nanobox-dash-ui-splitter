@@ -11,6 +11,7 @@
 	.st5{fill:#274D69;}
 	.st6{fill:#43A7D1;}
 	.st7{fill:none;stroke:#274D69;stroke-miterlimit:10;}
+	.st8{fill:none;stroke:#274D69;stroke-width:3;stroke-miterlimit:10;}
 </style>
 <g id="horizontal-single">
 	<polyline class="st0" points="231.8,62.2 212,73.6 212,98.7 	"/>
@@ -154,5 +155,9 @@
 	<polyline class="st3" points="289.6,206.3 289.6,209 289.6,211.9 	"/>
 	<polyline class="st2" points="300,212.3 289.6,218.5 279.3,212.3 	"/>
 	<polygon class="st2" points="300,222.7 289.6,228.9 279.3,222.7 279.3,212.3 289.6,206.1 300,212.3 	"/>
+</g>
+<g>
+	<line class="st8" x1="359.1" y1="202.3" x2="379.7" y2="223"/>
+	<line class="st8" x1="379.7" y1="202.3" x2="359.1" y2="223"/>
 </g>
 </svg>

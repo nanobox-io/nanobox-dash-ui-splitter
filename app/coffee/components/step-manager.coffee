@@ -50,8 +50,7 @@ module.exports = class StepManager
   # (usually called by the subsequent step)
 
   # Get the scale / plan for each member
-  getPlans : () =>
-    @scale.getSelectedPlans()
+  getPlans : () => @scale.getSelectedPlans()
 
   # When the user wants to split onto an existing bunkhouse, we need to
   # modify the neumber of steps and a few other things..

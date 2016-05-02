@@ -3,6 +3,7 @@ scale = require 'jade/scale'
 module.exports = class Scale
 
   constructor: ($el, @isHorizontallyScalable, @getConfiguration) ->
+    @totalInstances = 1
     @$node = $ scale( {isHorizontal: @isHorizontallyScalable} )
     $el.append @$node
     $scaleHolder = $ '.scale-holder', @$node
@@ -53,7 +54,7 @@ module.exports = class Scale
       if @activeMember == 'secondary'
         @memberData.secondary.userHasSpecified = true
 
-  onInstanceTotalChange : () ->
+  onInstanceTotalChange : ( @totalInstances ) =>
 
   getSelectedPlans : () ->
 
@@ -75,6 +76,9 @@ module.exports = class Scale
       if !member.planId?
         member.planId   = @scaleMachine.getDefaultPlan()
         member.planData = @scaleMachine.getPlanData member.planId
+
+    if @isHorizontallyScalable
+      @memberData.primary.totalInstances = @totalInstances
 
     return @memberData
 

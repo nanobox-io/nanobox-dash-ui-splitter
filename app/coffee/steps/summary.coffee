@@ -10,16 +10,20 @@ module.exports = class Summary
     for key, member of members
       member.icon = @getIcon key
 
-    @$node = $ summary( {members: members} )
+    data =
+       members      : members
+       isHorizontal : @isHorizontal
+
+    @$node = $ summary( data )
     @$el.append @$node
     castShadows @$node
 
   getIcon : (memberKind) ->
     switch memberKind
-      when "primary"   then return 'vertical-single'
-      when "secondary" then return 'vertical-single'
-      when "monitor"   then return 'monitor'
-      when "cluster"   then return 'horizontal-cluster'
+      when "primary"     then return 'vertical-single'
+      when "secondary"   then return 'vertical-single'
+      when "monitor"     then return 'monitor'
+      when "cluster"     then return 'horizontal-cluster'
       when "single"
         if @isHorizontal then return 'horizontal-single'
         else                  return 'vertical-single'
