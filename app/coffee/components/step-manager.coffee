@@ -7,9 +7,9 @@ stepManager   = require 'jade/step-manager'
 
 module.exports = class StepManager
 
-  constructor: ($el, @isHorizontal=false, @bunkHouses, @submitCb, @cancelCb) ->
+  constructor: (@$el, @isHorizontal=false, @bunkHouses, @submitCb, @cancelCb) ->
     @$node = $ stepManager( {} )
-    $el.append @$node
+    @$el.append @$node
     @$wrapper = $ '.step-wrapper', @$node
     @$steps = $ ".steps", @$node
     castShadows @$node
@@ -26,7 +26,7 @@ module.exports = class StepManager
       if !@pickingExistingHost
         @nextStep()
       else
-        @submit()
+        @submit(true)
 
     $('.back', @$node).on 'click',    ()=>
       @previousStep()
@@ -104,9 +104,28 @@ module.exports = class StepManager
 
   # ------------------------------------ Submit
 
-  submit : ()->
-    data =
-      plans  : @scale.getSelectedPlans()
-      config : @configuration.getData()
+  submit : (isExistingBunkhouse=false)->
+    # If they are simply transferring to an existing bunkhouse
+    if isExistingBunkhouse
+      data =
+        isNewServer: false
+        bunkhouseId: $("#bunkhaus-picker", @$el).val()
+
+    # They are transferring to a new server
+    else
+      plans  = @scale.getSelectedPlans()
+      config = @configuration.getData()
+
+      data =
+        isBunkhouse: config.isBunkhouse
+        isNewServer: config.isNewServer
+        topology:    config.topology
+        plans:       {}
+
+      for key, plan of plans
+        data.plans[key] =
+          planId: plan.planId
+          totalInstances: plan.totalInstances
 
     @submitCb data
+    PubSub.publish 'SPLITTER.SPLIT', data

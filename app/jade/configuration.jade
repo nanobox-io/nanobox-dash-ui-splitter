@@ -24,7 +24,7 @@
             li  
               input(type="radio" name="bunkhaus" value="existing") 
               .txt Existing Host
-              select
+              select#bunkhaus-picker
                 each haus in bunkHouses
                   if haus.current
                     option(value="#{haus.id}" disabled) #{haus.name} (Current)
