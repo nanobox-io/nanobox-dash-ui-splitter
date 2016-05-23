@@ -14,8 +14,6 @@ module.exports = class StepManager
     @cancelCb     = config.cancelCb
     @componentId  = config.componentId
 
-    console.log @bunkHouses
-
     @$node = $ stepManager( {} )
     @$el.append @$node
     @$wrapper = $ '.step-wrapper', @$node
