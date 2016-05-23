@@ -7,7 +7,15 @@ stepManager   = require 'jade/step-manager'
 
 module.exports = class StepManager
 
-  constructor: (@$el, @isHorizontal=false, @bunkHouses, @submitCb, @cancelCb) ->
+  constructor: (@$el, config) ->
+    @isHorizontal = config.isHorizontal
+    @bunkHouses   = config.bunkHouses
+    @submitCb     = config.submitCb
+    @cancelCb     = config.cancelCb
+    @componentId  = config.componentId
+
+    console.log @bunkHouses
+
     @$node = $ stepManager( {} )
     @$el.append @$node
     @$wrapper = $ '.step-wrapper', @$node
@@ -105,23 +113,24 @@ module.exports = class StepManager
   # ------------------------------------ Submit
 
   submit : (isExistingBunkhouse=false)->
-    # If they are simply transferring to an existing bunkhouse
+    data =
+      componentId: @componentId
+    # If they are simply transferring to an existing bunkhouse:
     if isExistingBunkhouse
-      data =
-        isNewServer: false
-        bunkhouseId: $("#bunkhaus-picker", @$el).val()
+      data.isNewServer = false
+      data.bunkhouseId = $("#bunkhaus-picker", @$el).val()
 
-    # They are transferring to a new server
+    # Else they are transferring to a new server:
     else
       plans  = @scale.getSelectedPlans()
       config = @configuration.getData()
 
-      data =
-        isBunkhouse: config.isBunkhouse
-        isNewServer: config.isNewServer
-        topology:    config.topology
-        plans:       {}
+      data.isBunkhouse = config.isBunkhouse
+      data.isNewServer = config.isNewServer
+      data.topology    = config.topology
+      data.plans       = {}
 
+      # Grab all the plans and save them to the data
       for key, plan of plans
         data.plans[key] =
           planId: plan.planId
