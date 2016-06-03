@@ -21,6 +21,7 @@ module.exports = class Scale
   activate : () ->
     @serverConfig = @getConfiguration()
     @scaleMachine.refresh @serverConfig.topology=='redundant', @isHorizontallyScalable
+
   getTitle : () ->
     if @serverConfig.topology == 'bunkhouse'
       return 'Choose a scale for a new multi-component VM'
