@@ -38,7 +38,7 @@ cssStagePath      = 'stage/stage.scss'
 appJsPath         = ['app/coffee/**/*.coffee', "#{jadeTargetDir}/**/*.js"]
 stageJsPath       = 'stage/**/*.coffee'
 assetPath         = 'app/assets/*.!(svg)'
-svgPath           = 'app/assets/compiled/*.svg'
+svgPath           = ['libs/core-styles/svg/compiled/**/*.svg', 'app/assets/compiled/**/*.svg']
 mainJsFile        = './app/coffee/main.coffee'
 mainStageJsFile   = './stage/stage.coffee'
 
@@ -111,7 +111,7 @@ compileFiles = (doWatch=false, cb) ->
     {meth:jsStage,    glob:stageJsPath}
     {meth:cssStage,   glob:cssStagePath}
     {meth:htmlStage,  glob:jadeStagePath}
-    {meth:copyAssets, glob:assetPath, params:['server/assets', onComplete]}
+    {meth:copyAssets, glob:assetPath, params:['./server/assets/core-styles/', onComplete]}
   ]
 
   createWatcher = (item, params)->

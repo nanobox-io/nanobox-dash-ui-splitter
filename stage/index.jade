@@ -9,6 +9,8 @@ html(lang="en")
     link(href="bower-libs/scale-machine/rel/style.css", rel="stylesheet")
     // endbuild
     
+    link(href="css/shared-svg.css", rel="stylesheet")
+    
     // build:css style.css
     link(href="css/main.css", rel="stylesheet")
     link(href="css/splitter-svg.css", rel="stylesheet")
@@ -17,17 +19,19 @@ html(lang="en")
   body
     .holder
     // build:remove 
+    script(src="bower-libs/PubSubJS/src/pubsub.js")
     script(src="bower-libs/jquery/dist/jquery.js")
     script(src="bower-libs/shadow-icons/rel/app.js")
     script(src="bower-libs/jade/runtime.js")
     script(src="bower-libs/scale-machine/rel/app.js")
     script(src="bower-libs/scale-machine/rel/data-shim.js")
-    script(src="bower-libs/PubSubJS/src/pubsub.js")
     script(src="https://use.typekit.net/cqd5kth.js")
     // endbuild
     
     script(type="text/javascript") try{Typekit.load({ async: true });}catch(e){}
 
+    script(src="js/shared-svg.js")
+      
     // build:js app.js
     script(src="js/main.js")
     script(src="js/splitter-svg.js")

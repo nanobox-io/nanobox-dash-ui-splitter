@@ -22,7 +22,7 @@ module.exports = class Summary
     switch memberKind
       when "primary"     then return 'vertical-single'
       when "secondary"   then return 'vertical-single'
-      when "monitor"     then return 'monitor'
+      when "monitor"     then return 'monitor-instance'
       when "cluster"     then return 'horizontal-cluster'
       when "single"
         if @isHorizontal then return 'horizontal-single'

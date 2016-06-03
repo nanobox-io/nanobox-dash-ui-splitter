@@ -91,13 +91,15 @@ module.exports = class StepManager
     @$currentStep.text @steps.currentItemIndex+1
     @$stepTitle.text @steps.currentItem().getTitle()
     left = - @steps.currentItem().$node.position().left
-    tall = @steps.currentItem().$node.children().outerHeight()
-    @$wrapper.css height: tall
     me = @
 
     setTimeout ()->
-      me.$steps.css left: left
+      tall = me.steps.currentItem().$node.children().outerHeight()
+      me.$wrapper.css height: tall
     , 100
+    setTimeout ()->
+      me.$steps.css left: left
+    , 200
 
     # If it's the last item, change the next button to submit
     @$node.removeClass 'submit'
