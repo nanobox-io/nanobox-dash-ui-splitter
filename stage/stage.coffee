@@ -26,4 +26,4 @@ config =
   submitCb     : onSubmit
   cancelCb     : onCancel
 
-app = new nanobox.Splitter $(".holder"), config
+app = new nanobox.Splitter $(".holder-div"), config

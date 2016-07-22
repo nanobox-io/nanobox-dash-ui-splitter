@@ -9,14 +9,14 @@
       }
     }
   }
-  .step-key     { background:#BDC9CC; display:flex; border-bottom: solid 1px #CACACA;  height:38px; align-items: center; padding-left: 20px;
+  .step-key     { background:#CDD3D8; display:flex; border-bottom: solid 1px #CACACA;  height:38px; align-items: center; padding-left: 20px;
     .step-count { font-style:italic; color: white; font-size: 13px; margin-right:15px; text-transform: uppercase;
       &:after   { content: " : "}
     }
     .step-title { color:#69737D; text-transform:uppercase; font-weight: bold; font-size:14px; }
     .ui-btn     { margin-left:auto; }
   }
-  .ui           { display: flex; width: 100%; background: #EDEDED; height:36px; justify-content: flex-end;
+  .ui           { display: flex; width: 100%; background: #CDD3D8; height:36px; justify-content: flex-end;
     .btn        { position: relative; margin-right:-18px;
       &:after   { content: "Next"; color: white; position: absolute; top: 10px; left:45%; transform: translate(-50%, 0);  }
     }
