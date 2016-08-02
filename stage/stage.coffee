@@ -5,14 +5,12 @@ bunkHouses = [
   {id:"bh2", name:"EC2 2"}
 ]
 
-isHorizontal = false
-
 onCancel = ()->
   console.log "canceling.."
 
 onSubmit = (data)->
-  # console.log "submitting:"
-  # console.log data
+  console.log "submitting:"
+  console.log data
 
 PubSub.subscribe 'SPLITTER.SPLIT', (message, data)->
   console.log "Splitter just submitted:"
@@ -20,8 +18,9 @@ PubSub.subscribe 'SPLITTER.SPLIT', (message, data)->
   console.log JSON.stringify(data)
 
 config =
+  canCluster   : false
   componentId  : "asf09s0nafs0-fakecomponentID"
-  isHorizontal : false
+  isHorizontal : true
   bunkHouses   : bunkHouses
   submitCb     : onSubmit
   cancelCb     : onCancel

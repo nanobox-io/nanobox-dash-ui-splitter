@@ -20,6 +20,10 @@
       }
       .title            { text-transform: uppercase; font-weight: bold; letter-spacing: 0.04em; border-bottom: 1px solid #CECECE; width: 100%; text-align: center; padding: 4px 0; margin: 24px 0 13px; }
       .blurb            { @include text; }
+      &.disabled        { pointer-events: none; position:relative;
+        &:after         { content: "coming-soon"; background:white; padding:4px 8px; right:22px; top: 115px; position:absolute; color:#7F8499; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; @include drop-shadow(0px, 1px, 3px, #AAA); }
+        *               { opacity: 0.85; }
+      }
     }
     .radios             { align-self: flex-start; padding: 15px 0 25px;
       &.inactive        { opacity:0.5; pointer-events: none; }

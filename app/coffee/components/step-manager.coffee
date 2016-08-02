@@ -13,6 +13,7 @@ module.exports = class StepManager
     @submitCb     = config.submitCb
     @cancelCb     = config.cancelCb
     @componentId  = config.componentId
+    @canCluster   = config.canCluster
 
     @$node = $ stepManager( {} )
     @$el.append @$node
@@ -41,7 +42,7 @@ module.exports = class StepManager
       @cancelCb()
 
   initSteps : () ->
-    @configuration = new Configuration @$steps, @isHorizontal, @bunkHouses, @changeIsExistingBunkhouse
+    @configuration = new Configuration @$steps, @isHorizontal, @bunkHouses, @canCluster, @changeIsExistingBunkhouse
     @scale         = new Scale @$steps, @isHorizontal, @getConfiguration
     @summary       = new Summary @$steps, @isHorizontal, @getPlans
 

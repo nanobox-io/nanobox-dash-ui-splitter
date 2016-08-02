@@ -19,8 +19,11 @@ module.exports = class Summary
     castShadows @$node
 
   getIcon : (memberKind) ->
+    console.log memberKind
     switch memberKind
-      when "primary"     then return 'vertical-single'
+      when "default", "primary"
+        if @isHorizontal then return 'horizontal-cluster'
+        else                  return 'vertical-single'
       when "secondary"   then return 'vertical-single'
       when "monitor"     then return 'monitor-instance'
       when "cluster"     then return 'horizontal-cluster'
