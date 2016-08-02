@@ -18,7 +18,7 @@ PubSub.subscribe 'SPLITTER.SPLIT', (message, data)->
   console.log JSON.stringify(data)
 
 config =
-  canCluster   : false
+  scalesRedund : true
   componentId  : "asf09s0nafs0-fakecomponentID"
   isHorizontal : true
   bunkHouses   : bunkHouses
