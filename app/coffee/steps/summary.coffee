@@ -19,7 +19,6 @@ module.exports = class Summary
     castShadows @$node
 
   getIcon : (memberKind) ->
-    console.log memberKind
     switch memberKind
       when "default", "primary"
         if @isHorizontal then return 'horizontal-cluster'

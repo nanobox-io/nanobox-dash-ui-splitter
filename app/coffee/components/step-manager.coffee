@@ -8,12 +8,12 @@ stepManager   = require 'jade/step-manager'
 module.exports = class StepManager
 
   constructor: (@$el, config) ->
-    @isHorizontal = config.isHorizontal
+    @isHorizontal = config.category != "data"
     @bunkHouses   = config.bunkHouses
     @submitCb     = config.submitCb
     @cancelCb     = config.cancelCb
     @componentId  = config.componentId
-    @scalesRedund = config.scalesRedund
+    @clusterable = config.clusterable
 
     @$node = $ stepManager( {} )
     @$el.append @$node
@@ -42,7 +42,7 @@ module.exports = class StepManager
       @cancelCb()
 
   initSteps : () ->
-    @configuration = new Configuration @$steps, @isHorizontal, @bunkHouses, @scalesRedund, @changeIsExistingBunkhouse
+    @configuration = new Configuration @$steps, @isHorizontal, @bunkHouses, @clusterable, @changeIsExistingBunkhouse
     @scale         = new Scale @$steps, @isHorizontal, @getConfiguration
     @summary       = new Summary @$steps, @isHorizontal, @getPlans
 

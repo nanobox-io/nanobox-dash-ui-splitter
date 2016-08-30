@@ -2,7 +2,7 @@ configuration = require 'jade/configuration'
 
 module.exports = class Configuration
 
-  constructor: ($el, @isHorizontal, bunkHouses, scalesRedund, @isExistingHostCb) ->
+  constructor: ($el, @isHorizontal, bunkHouses, clusterable, @isExistingHostCb) ->
     data = @getConfig bunkHouses
     @$node = $ configuration(data)
     $el.append @$node
@@ -19,12 +19,12 @@ module.exports = class Configuration
         @isExistingHostCb false
 
     @selection = $('.option.picked .icon', @$node).attr 'data-id'
-    @setInitialState scalesRedund
+    @setInitialState clusterable
 
-  setInitialState : (scalesRedund) ->
+  setInitialState : (clusterable) ->
     $bunkhouse = $(".option.bunkhouse", @$node)
     $redundant = $(".option.redundant", @$node)
-    if !scalesRedund
+    if !clusterable
       $bunkhouse.addClass 'picked'
       $('.icon', $bunkhouse).trigger 'click'
       $redundant.remove()

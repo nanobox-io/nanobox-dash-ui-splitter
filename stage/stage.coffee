@@ -18,9 +18,9 @@ PubSub.subscribe 'SPLITTER.SPLIT', (message, data)->
   console.log JSON.stringify(data)
 
 config =
-  scalesRedund : true
   componentId  : "asf09s0nafs0-fakecomponentID"
-  isHorizontal : true
+  category     : 'web'     # web, worker, data   # (new vals)
+  clusterable  : true                            # (new vals)
   bunkHouses   : bunkHouses
   submitCb     : onSubmit
   cancelCb     : onCancel
