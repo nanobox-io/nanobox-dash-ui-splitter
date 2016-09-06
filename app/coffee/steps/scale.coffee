@@ -29,3 +29,9 @@ module.exports = class Scale
       return "Choose a VM size and number of instances"
     else
       return "Configure the scale for each cluster member"
+
+  onSelectionChange : () =>
+    # console.log @scaleMachine.getUserSelectedPlan()
+
+  getSelectedPlans : () -> @scaleMachine.getUserSelectedPlan()
+  
