@@ -19,7 +19,7 @@ PubSub.subscribe 'SPLITTER.SPLIT', (message, data)->
 
 config =
   componentId  : "asf09s0nafs0-fakecomponentID"
-  category     : 'web'     # web, worker, data   # (new vals)
+  category     : 'data'     # web, worker, data   # (new vals)
   clusterable  : true                            # (new vals)
   bunkHouses   : bunkHouses
   submitCb     : onSubmit
