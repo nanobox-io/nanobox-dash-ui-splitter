@@ -43,8 +43,8 @@ module.exports = class StepManager
 
   initSteps : () ->
     @configuration = new Configuration @$steps, @isHorizontal, @bunkHouses, @clusterable, @changeIsExistingBunkhouse
-    @scale         = new Scale @$steps, @isHorizontal, @getConfiguration
-    @summary       = new Summary @$steps, @isHorizontal, @getPlans
+    @scale         = new Scale @$steps, @isHorizRedund, @getConfiguration
+    @summary       = new Summary @$steps, @isHorizontal, @isHorizRedund, @getPlans
 
     steps = [@configuration, @scale, @summary]
     @steps = new Sequence steps
@@ -57,7 +57,9 @@ module.exports = class StepManager
   # (usually called by the subsequent step)
 
   # Get the scale / plan for each member
-  getPlans : () => @scale.getSelectedPlans()
+  getPlans      : () => @scale.getSelectedPlans()
+  isHorizRedund : () => @isHorizontal && !@configuration.isBunkhouse()
+
 
   # When the user wants to split onto an existing bunkhouse, we need to
   # modify the neumber of steps and a few other things..
@@ -133,9 +135,12 @@ module.exports = class StepManager
 
       # Grab all the plans and save them to the data
       for key, plan of plans
+        data.totalInstances = plan.totalInstances
         data.plans[key] =
           planId: plan.planId
-          totalInstances: plan.totalInstances
+
+    if data.totalInstances == undefined
+      delete data.totalInstances
 
     @submitCb data
     PubSub.publish 'SPLITTER.SPLIT', data

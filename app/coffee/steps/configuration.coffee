@@ -31,6 +31,8 @@ module.exports = class Configuration
     else
       $redundant.addClass 'picked'
 
+  isBunkhouse : ()-> @selection == 'bunkhouse'
+
   getConfig : (bunkHouses) ->
     obj =
       singleTitle    : "Single"

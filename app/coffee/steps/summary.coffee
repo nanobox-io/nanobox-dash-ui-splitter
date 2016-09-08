@@ -2,7 +2,7 @@ summary = require 'jade/summary'
 
 module.exports = class Summary
 
-  constructor: (@$el, @isHorizontal, @getPlans) ->
+  constructor: (@$el, @isHorizontal, @isHorizRedund, @getPlans) ->
   getTitle : () -> "Review and Submit"
   activate : () ->
     @$node?.remove()
@@ -11,8 +11,9 @@ module.exports = class Summary
       member.icon = @getIcon key
 
     data =
-       members      : members
-       isHorizontal : @isHorizontal
+       members            : members
+       isHorizontal       : @isHorizontal
+       isHorizontalRedund : @isHorizRedund()
 
     @$node = $ summary( data )
     @$el.append @$node
@@ -21,8 +22,9 @@ module.exports = class Summary
   getIcon : (memberKind) ->
     switch memberKind
       when "default", "primary"
-        if @isHorizontal then return 'horizontal-cluster'
-        else                  return 'vertical-single'
+        if      @isHorizRedund() then return 'horizontal-cluster'
+        else if @isHorizontal    then return 'horizontal-single'
+        else                        return 'vertical-single'
       when "secondary"   then return 'vertical-single'
       when "monitor"     then return 'monitor-instance'
       when "cluster"     then return 'horizontal-cluster'

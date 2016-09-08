@@ -13,7 +13,7 @@
               .spec #{member.planData.CPU} CPU CORE
               .spec #{member.planData.DISK} GB SSD DISK
               .spec $#{member.planData.dollarsPerHr}/hr
-          if isHorizontal
+          if isHorizontalRedund
             .total-instances
               img.shadow-icon(data-src="instance-multiply")
               .total= member.totalInstances
