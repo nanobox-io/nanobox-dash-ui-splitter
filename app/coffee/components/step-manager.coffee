@@ -122,6 +122,7 @@ module.exports = class StepManager
     if isExistingBunkhouse
       data.isNewServer = false
       data.bunkhouseId = $("#bunkhaus-picker", @$el).val()
+      data.isBunkhouse = true
 
     # Else they are transferring to a new server:
     else

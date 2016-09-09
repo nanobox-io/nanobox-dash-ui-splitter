@@ -2,6 +2,7 @@ PubSub.subscribe 'STATS.GET_OPTIONS', (m, cb)-> cb scaleMachineTestData.getHostO
 
 bunkHouses = [
   {id:"bh1", current:true, name:"EC2 1"}
+  {id:"bh2", name:"EC2 2"}
 ]
 
 onCancel = ()->
