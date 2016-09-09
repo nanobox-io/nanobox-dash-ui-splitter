@@ -7,12 +7,20 @@
             img.shadow-icon(data-src="#{member.icon}")
             .txt=key
           .details
-            .title AWS Instance Specs
+            .server-kind #{hostKind} Specs
             .specs
-              .spec #{member.planData.RAM} GB RAM
-              .spec #{member.planData.CPU} CPU CORE
-              .spec #{member.planData.DISK} GB SSD DISK
-              .spec $#{member.planData.dollarsPerHr}/hr
+              .spec 
+                .metric RAM
+                .value #{member.planData.RAM} GB 
+              .spec 
+                .metric CPU
+                .value #{member.planData.CPU} CORES
+              .spec 
+                .metric DISK
+                .value #{member.planData.DISK} GB
+              .spec.cost
+                .metric #{provider} Cost  
+                .value $#{member.planData.dollarsPerHr}/hr
           if isHorizontalRedund
             .total-instances
               img.shadow-icon(data-src="instance-multiply")

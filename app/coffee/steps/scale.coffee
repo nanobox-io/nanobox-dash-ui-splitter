@@ -35,3 +35,4 @@ module.exports = class Scale
     # console.log @scaleMachine.getUserSelectedPlan()
 
   getSelectedPlans : () -> @scaleMachine.getUserSelectedPlan()
+  getMeta          : () -> @scaleMachine.getProviderMetadata()

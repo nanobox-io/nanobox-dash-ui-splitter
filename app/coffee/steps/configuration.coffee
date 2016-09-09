@@ -18,8 +18,8 @@ module.exports = class Configuration
       else
         @isExistingHostCb false
 
-    @selection = $('.option.picked .icon', @$node).attr 'data-id'
     @setInitialState clusterable
+    @selection = $('.option.picked .icon', @$node).attr 'data-id'
 
   setInitialState : (clusterable) ->
     $bunkhouse = $(".option.bunkhouse", @$node)
@@ -50,7 +50,6 @@ module.exports = class Configuration
       obj.redundantBlurb = "A primary and secondary instance of your data component plus  a small monitor to sync data state between the two and switch traffic to the secondary if the primary should fail."
 
     obj.bunkHouses = bunkHouses
-
     return obj
 
   getData : () ->
@@ -63,7 +62,6 @@ module.exports = class Configuration
     # I it is being split onto an existing server, save that id
     if obj.isBunkhouse && !obj.isNewServer
       obj.existingServerId = $("select", @$node).val()
-
     return obj
 
 

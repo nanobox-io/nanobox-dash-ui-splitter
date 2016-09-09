@@ -1,37 +1,40 @@
-.splitter.step-manager   { position: relative;
+.splitter.step-manager {position: relative;
   $easing : cubic-bezier(0.840, 0.005, 0.000, 1.000);
-  .step-wrapper { position:relative; overflow: hidden; @include transition(height, 500ms, $easing);
-    .steps      { left:0; display: flex; position: absolute; @include transition(left, 500ms, $easing);
-      .step     { width:600px; flex-shrink: 0; margin-right:0px;
+  .step-wrapper        {position:relative; overflow: hidden; @include transition(height, 500ms, $easing);
+    .steps             {left:0; display: flex; position: absolute; @include transition(left, 500ms, $easing);
+      .step            {width:600px; flex-shrink: 0; margin-right:0px;
         @import 'configuration';
         @import 'scale';
         @import 'summary';
       }
     }
   }
-  .step-key     { background:#CDD3D8; display:flex; border-bottom: solid 1px #CACACA;  height:38px; align-items: center; padding-left: 20px;
-    .step-count { font-style:italic; color: white; font-size: 13px; margin-right:15px; text-transform: uppercase;
-      &:after   { content: " : "}
+  .step-key            {background:#CDD3D8; display:flex; border-bottom: solid 1px #CACACA;  height:38px; align-items: center; padding-left: 20px;
+    .step-count        {font-style:italic; color: white; font-size: 13px; margin-right:15px; text-transform: uppercase;
+      &:after          {content: " : "}
     }
-    .step-title { color:#69737D; text-transform:uppercase; font-weight: bold; font-size:14px; }
-    .ui-btn     { margin-left:auto; }
+    .step-title        {color:#69737D; text-transform:uppercase; font-weight: bold; font-size:14px; }
+    .ui-btn            {margin-left:auto; }
   }
-  .ui           { display: flex; width: 100%; background: #CDD3D8; height:36px; justify-content: flex-end;
-    .btn        { position: relative; margin-right:-18px;
-      &:after   { content: "Next"; color: white; position: absolute; top: 10px; left:45%; transform: translate(-50%, 0);  }
+  .ui                  {display: flex; width: 100%; background: #CDD3D8; height:36px; justify-content: flex-end;
+    .btn               {position: relative; margin-right:-18px; cursor:pointer;
+      &:after          {content: "Next"; color: white; position: absolute; top: 10px; left:45%; transform: translate(-50%, 0); text-transform:uppercase; }
+      &:hover          {
+        svg *          {fill:#0a85b9;}
+      }
     }
   }
-  &.first .ui   {
-    .back       { display: none; }
+  &.first .ui          {
+    .back              {display: none; }
   }
-  .ui-btn     { cursor: pointer; display: flex; align-items: center; font-size:13px; font-style: italic; color: #7F8499; margin: 0 10px 0 6px;
-    .txt      { margin-left: 3px; }
-    &.back    { margin-right: 17px;  }
-    &.cancel  { }
+  .ui-btn              {cursor: pointer; display: flex; align-items: center; font-size:13px; font-style: italic; color: #7F8499; margin: 0 10px 0 6px;
+    .txt               {margin-left: 3px; }
+    &.back             {margin-right: 17px;  }
+    &.cancel           {}
   }
   // Change the next button to 'submit' but adding .submit class
   &.existing-host-pick .ui,
-  &.submit .ui  {
-    .btn:after  { content: "Submit"; cursor: pointer; }
+  &.submit .ui         {
+    .btn:after         {content: "Submit"; cursor: pointer; }
   }
 }

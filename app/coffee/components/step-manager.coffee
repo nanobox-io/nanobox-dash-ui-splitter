@@ -57,7 +57,9 @@ module.exports = class StepManager
   # (usually called by the subsequent step)
 
   # Get the scale / plan for each member
-  getPlans      : () => @scale.getSelectedPlans()
+  getPlans      : () =>
+    plans : @scale.getSelectedPlans()
+    meta  : @scale.getMeta()
   isHorizRedund : () => @isHorizontal && !@configuration.isBunkhouse()
 
 

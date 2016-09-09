@@ -28,7 +28,7 @@
     .radios             { align-self: flex-start; padding: 15px 0 25px;
       &.inactive        { opacity:0.5; pointer-events: none; }
       ul                { list-style: none; margin:0; padding:0;
-        li              { @include text; margin:0 0 3px; padding:0; display:flex;   align-items: center; font-size:13px;
+        li              { @include text; margin:0 0 3px; padding:2px 0; display:flex; font-size:13px; 
           input         { margin-right:7px; }
           .txt          {  }
           select        { margin-left:7px; width:70px; }

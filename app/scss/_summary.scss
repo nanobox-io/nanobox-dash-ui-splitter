@@ -1,19 +1,28 @@
 &.summary              {
-  .wrapper             { padding:40px; }
-  .hosts               { display:flex; flex-wrap: wrap;
-    .host              { display:flex; margin:0 40px 30px 0;
-      .icon            { display: flex; justify-content: center; flex-direction: column; align-items:center;
-        .txt           { font-size:14px; font-weight:$bold; text-transform: uppercase; color: #274D69; margin-top:15px; }
-        svg *          { stroke: #274D69; }
+  .wrapper             {padding:40px; }
+  .hosts               {display:flex; flex-wrap: wrap;
+    .host              {display:flex; margin:0 40px 30px 0;
+      .icon            {display: flex; justify-content: center; flex-direction: column; align-items:center;
+        .txt           {font-size:14px; font-weight:$bold; text-transform: uppercase; color: #274D69; margin-top:15px; }
+        svg *          {stroke: #274D69; }
       }
-      .details         { margin-left:20px;
-        .title         { font-style:italic; font-weight:medium; font-size: 13px; color:#7d97ad;}
-        .specs         { color: #274D69;
-          .spec        { }
+      .details         {margin-left:20px;
+        .title         {font-style:italic; font-weight:medium; font-size: 13px; color:#7d97ad; margin-bottom:10px}
+        .server-kind   {font-style:italic; font-size: 11px; color:#274D69; border-bottom: solid 1px #8E9199; margin-bottom:3px; padding-bottom:3px;}
+        .specs         {color: #274D69;
+          .spec        {display:flex;
+            .metric    {min-width:30px; font-style:italic;}
+            .value     {
+              &:before {content:" : ";}
+            }
+            &.cost     { border-top: solid 1px #8E9199; margin-top:3px; padding-top:3px;
+              .metric  {}
+            }
+          }
         }
       }
-      .total-instances { align-self: center; display: flex; align-items: center; margin-left: 40px;
-        .total         { border-radius: 50%; color:white; width: 75px; height: 75px; background: #274D67; font-size:43px; text-align:center; line-height: 77px;  margin-left: 30px; }
+      .total-instances {align-self: center; display: flex; align-items: center; margin-left: 40px;
+        .total         {border-radius: 50%; color:white; width: 75px; height: 75px; background: #274D67; font-size:43px; text-align:center; line-height: 77px;  margin-left: 30px; }
       }
     }
   }

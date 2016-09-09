@@ -2,18 +2,21 @@ summary = require 'jade/summary'
 
 module.exports = class Summary
 
-  constructor: (@$el, @isHorizontal, @isHorizRedund, @getPlans) ->
+  constructor: (@$el, @isHorizontal, @isHorizRedund, @getScaleData) ->
   getTitle : () -> "Review and Submit"
   activate : () ->
     @$node?.remove()
-    members = @getPlans()
-    for key, member of members
+
+    data = @getScaleData()
+    for key, member of data.plans
       member.icon = @getIcon key
 
     data =
-       members            : members
-       isHorizontal       : @isHorizontal
-       isHorizontalRedund : @isHorizRedund()
+      provider           : data.meta.title
+      hostKind           : data.meta.serverTitle
+      members            : data.plans
+      isHorizontal       : @isHorizontal
+      isHorizontalRedund : @isHorizRedund()
 
     @$node = $ summary( data )
     @$el.append @$node
