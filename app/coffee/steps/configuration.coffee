@@ -2,8 +2,8 @@ configuration = require 'jade/configuration'
 
 module.exports = class Configuration
 
-  constructor: ($el, @isHorizontal, bunkHouses, clusterable, @isExistingHostCb) ->
-    data = @getConfig bunkHouses
+  constructor: ($el, @isHorizontal, bunkHouses, clusterable, isCluster, @isExistingHostCb) ->
+    data   = @getConfig bunkHouses
     @$node = $ configuration(data)
     $el.append @$node
     castShadows @$node
@@ -18,7 +18,7 @@ module.exports = class Configuration
       else
         @isExistingHostCb false
 
-    @setInitialState clusterable
+    @setInitialState (clusterable && !isCluster)
     @selection = $('.option.picked .icon', @$node).attr 'data-id'
 
   setInitialState : (clusterable) ->
@@ -50,6 +50,20 @@ module.exports = class Configuration
       obj.redundantBlurb = "A primary and secondary instance of your data component plus  a small monitor to sync data state between the two and switch traffic to the secondary if the primary should fail."
 
     obj.bunkHouses = bunkHouses
+
+    # If there are no bunkhouses:
+    if bunkHouses.length == 0
+      obj.showBunkhouseSelector = false
+    # else if there are more than one bunkhouse:
+    else if bunkHouses.length > 1
+      obj.showBunkhouseSelector = true
+    # else there is only one bunkhouse
+    else
+      obj.showBunkhouseSelector = true
+      # If that one bunkhouse if the bunkhouse we're currently on, don't show it
+      if bunkHouses[0].current
+        obj.showBunkhouseSelector = false
+
     return obj
 
   getData : () ->

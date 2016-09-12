@@ -18,6 +18,7 @@ PubSub.subscribe 'SPLITTER.SPLIT', (message, data)->
   console.log JSON.stringify(data)
 
 config =
+  isCluster    : false
   componentId  : "asf09s0nafs0-fakecomponentID"
   category     : 'web'     # web, worker, data   # (new vals)
   clusterable  : true                            # (new vals)

@@ -9,11 +9,12 @@ module.exports = class StepManager
 
   constructor: (@$el, config) ->
     @isHorizontal = config.category != "data"
+    @isCluster    = config.isCluster
     @bunkHouses   = config.bunkHouses
     @submitCb     = config.submitCb
     @cancelCb     = config.cancelCb
     @componentId  = config.componentId
-    @clusterable = config.clusterable
+    @clusterable  = config.clusterable
 
     @$node = $ stepManager( {} )
     @$el.append @$node
@@ -42,7 +43,7 @@ module.exports = class StepManager
       @cancelCb()
 
   initSteps : () ->
-    @configuration = new Configuration @$steps, @isHorizontal, @bunkHouses, @clusterable, @changeIsExistingBunkhouse
+    @configuration = new Configuration @$steps, @isHorizontal, @bunkHouses, @clusterable, @isCluster, @changeIsExistingBunkhouse
     @scale         = new Scale @$steps, @isHorizRedund, @getConfiguration
     @summary       = new Summary @$steps, @isHorizontal, @isHorizRedund, @getPlans
 
@@ -145,5 +146,7 @@ module.exports = class StepManager
     if data.totalInstances == undefined
       delete data.totalInstances
 
+    console.log "SUBMITTING NEW SERVER:"
+    console.log data
     @submitCb data
     PubSub.publish 'SPLITTER.SPLIT', data
