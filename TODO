@@ -1,3 +1,3 @@
-☐ change monitor to arbiter
-☐ Why are the various primary, secondary, and arbiter not showing up...
-☐ With horizontal clusters, use 'default' instead of 'primary'
+✔ change monitor to arbiter     done(√)
+✔ Why are the various primary, secondary, and arbiter not showing up...     done(√)
+✔ With anything but a data cluster, use 'default' instead of 'primary'     done(√)

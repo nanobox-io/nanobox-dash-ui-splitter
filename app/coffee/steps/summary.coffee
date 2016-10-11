@@ -29,7 +29,7 @@ module.exports = class Summary
         else if @isHorizontal    then return 'horizontal-single'
         else                        return 'vertical-single'
       when "secondary"   then return 'vertical-single'
-      when "monitor"     then return 'monitor-instance'
+      when "arbiter"     then return 'monitor-instance'
       when "cluster"     then return 'horizontal-cluster'
       when "single"
         if @isHorizontal then return 'horizontal-single'

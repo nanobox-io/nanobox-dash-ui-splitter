@@ -126,24 +126,31 @@ module.exports = class StepManager
 
     # If they are simply transferring to an existing bunkhouse:
     if isExistingBunkhouse
-      data.isNewServer = false
       data.bunkhouseId = $("#bunkhaus-picker", @$el).val()
       data.topology    = 'bunkhouse'
 
     # Else they are transferring to a new server:
     else
-      plans  = @scale.getSelectedPlans()
-      config = @configuration.getData()
+      plans         = @scale.getSelectedPlans()
+      config        = @configuration.getData()
+      isDataCluster = @category == 'data' && config.topology == 'cluster'
 
-      data.isNewServer = config.isNewServer
       data.topology    = config.topology
       data.sizes       = {}
 
       # Grab all the plans and save them to the data
       for key, plan of plans
         data.totalInstances = plan.totalInstances
-        data.sizes[key] =
-          planId : plan.planId
+
+
+        # If this isn't a redundant data cluster, the rails app wants the
+        # plan key to be `default` instead of primay
+        planKey = key
+        if planKey == 'primary' && !isDataCluster
+          planKey = 'default'
+
+        data.sizes[planKey] =
+          sizeId : plan.planId
 
     if data.totalInstances == undefined
       delete data.totalInstances

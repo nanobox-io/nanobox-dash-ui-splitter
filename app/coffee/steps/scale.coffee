@@ -21,7 +21,7 @@ module.exports = class Scale
   activate : () ->
     @isHorizRedund = @checkHorizReund()
     @serverConfig = @getConfiguration()
-    @scaleMachine.refresh @serverConfig.topology=='redundant', @isHorizRedund
+    @scaleMachine.refresh @serverConfig.topology=='cluster', @isHorizRedund
 
   getTitle : () ->
     if @serverConfig.topology == 'bunkhouse'
