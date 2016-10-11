@@ -9,6 +9,7 @@ module.exports = class StepManager
 
   constructor: (@$el, config) ->
     @isHorizontal = config.category != "data"
+    @category     = config.category
     @isCluster    = config.isCluster
     @bunkHouses   = config.bunkHouses
     @submitCb     = config.submitCb
@@ -120,33 +121,32 @@ module.exports = class StepManager
 
   submit : (isExistingBunkhouse=false)->
     data =
-      componentId: @componentId
+      componentId : @componentId
+      category    : @category
+
     # If they are simply transferring to an existing bunkhouse:
     if isExistingBunkhouse
       data.isNewServer = false
       data.bunkhouseId = $("#bunkhaus-picker", @$el).val()
-      data.isBunkhouse = true
+      data.topology    = 'bunkhouse'
 
     # Else they are transferring to a new server:
     else
       plans  = @scale.getSelectedPlans()
       config = @configuration.getData()
 
-      data.isBunkhouse = config.isBunkhouse
       data.isNewServer = config.isNewServer
       data.topology    = config.topology
-      data.plans       = {}
+      data.sizes       = {}
 
       # Grab all the plans and save them to the data
       for key, plan of plans
         data.totalInstances = plan.totalInstances
-        data.plans[key] =
-          planId: plan.planId
+        data.sizes[key] =
+          planId : plan.planId
 
     if data.totalInstances == undefined
       delete data.totalInstances
 
-    console.log "SUBMITTING NEW SERVER:"
-    console.log data
     @submitCb data
     PubSub.publish 'SPLITTER.SPLIT', data
