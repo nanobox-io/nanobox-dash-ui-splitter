@@ -149,8 +149,7 @@ module.exports = class StepManager
         if planKey == 'primary' && !isDataCluster
           planKey = 'default'
 
-        data.sizes[planKey] =
-          sizeId : plan.planId
+        data.sizes[planKey] = plan.planId
 
     if data.totalInstances == undefined
       delete data.totalInstances
