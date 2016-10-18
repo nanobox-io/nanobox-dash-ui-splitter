@@ -53,6 +53,7 @@ module.exports = class StepManager
 
     @slideToCurrentStep()
     $("#total-steps", @$node).text @steps.totalItems
+    @configuration.init()
 
   # ------------------------------------ Step Data
   # Retrieving data from various steps,
@@ -137,6 +138,9 @@ module.exports = class StepManager
 
       data.topology    = config.topology
       data.sizes       = {}
+
+      if data.topology == 'single-cluster'
+        data.topology = 'cluster'
 
       # Grab all the plans and save them to the data
       for key, plan of plans

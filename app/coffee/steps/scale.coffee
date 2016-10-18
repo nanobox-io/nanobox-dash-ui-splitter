@@ -32,7 +32,6 @@ module.exports = class Scale
       return "Configure the scale for each cluster member"
 
   onSelectionChange : () =>
-    # console.log @scaleMachine.getUserSelectedPlan()
 
   getSelectedPlans : () -> @scaleMachine.getUserSelectedPlan()
   getMeta          : () -> @scaleMachine.getProviderMetadata()

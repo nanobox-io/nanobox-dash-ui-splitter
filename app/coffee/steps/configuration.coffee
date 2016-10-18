@@ -13,13 +13,19 @@ module.exports = class Configuration
       @onCategoryChange $ e.currentTarget
 
     $("input", @$node).on 'click', (e)=>
-      if $(e.currentTarget).val() == 'existing'
+      @singleKind = $(e.currentTarget).val()
+      if @singleKind == 'existing'
         @isExistingHostCb true
       else
         @isExistingHostCb false
 
+
     @setInitialState (clusterable && !isCluster)
     @selection = $('.option.picked .icon', @$node).attr 'data-id'
+
+  init : () ->
+    $(".icon:first", @$node).trigger 'click'
+    $("input:radio:first", @$node).trigger 'click'
 
   setInitialState : (clusterable) ->
     $bunkhouse = $(".option.bunkhouse", @$node)
@@ -36,14 +42,16 @@ module.exports = class Configuration
   getConfig : (bunkHouses) ->
     obj =
       singleTitle    : "Single"
-      singleBlurb    : "A single instance of this component  installed on a multi-component server."
+      singleBlurb    : "A single instance of this component."
     if @isHorizontal
+      obj.isData         = false
       obj.singleIcon     = "horizontal-single"
       obj.redundantIcon  = "horizontal-cluster"
       obj.redundantTitle = "Horizontal Cluster"
       obj.redundantBlurb = "Cluster one or more instances of this component. Each instance lives on it’s own server for redundancy and greater performance. "
 
     else
+      obj.isData         = true
       obj.singleIcon     = "vertical-single"
       obj.redundantIcon  = "vertical-redundant"
       obj.redundantTitle = "Redundant Cluster"
@@ -73,9 +81,13 @@ module.exports = class Configuration
       isBunkhouse      : @selection == 'bunkhouse'
     }
 
-    # I it is being split onto an existing server, save that id
+    # If it is being split onto an existing server, save that id
     if obj.isBunkhouse && !obj.isNewServer
       obj.existingServerId = $("select", @$node).val()
+
+    if @selection == 'bunkhouse' && @singleKind == "new-single"
+      obj.topology = 'single-cluster'
+
     return obj
 
 
@@ -87,7 +99,7 @@ module.exports = class Configuration
     @$options.removeClass 'picked'
     $clicked.parent().addClass 'picked'
 
-    if @selection == 'redundant'
+    if @selection == 'cluster'
       $(".radios", @$node).addClass 'inactive'
       $("input[value='new']", @$node).prop 'checked', true
       @isExistingHostCb false

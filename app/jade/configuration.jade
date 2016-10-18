@@ -18,9 +18,13 @@
       if showBunkhouseSelector
         .radios.inactive
           ul
+            if isData
+              li
+                input(type="radio" name="bunkhaus" value="new-single" checked="checked") 
+                .txt New Single-Component Host
             li
-              input(type="radio" name="bunkhaus" value="new" checked="checked") 
-              .txt Split Onto New Server
+              input(type="radio" name="bunkhaus" value="new-multi") 
+              .txt New Multi-component Host
             li  
               input(type="radio" name="bunkhaus" value="existing") 
               .txt Existing Host
