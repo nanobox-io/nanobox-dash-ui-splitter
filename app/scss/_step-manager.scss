@@ -2,7 +2,7 @@
   $easing : cubic-bezier(0.840, 0.005, 0.000, 1.000);
   .step-wrapper        {position:relative; overflow: hidden; @include transition(height, 500ms, $easing);
     .steps             {left:0; display: flex; position: absolute; @include transition(left, 500ms, $easing);
-      .step            {width:600px; flex-shrink: 0; margin-right:0px;
+      .step            {width:600px; flex-shrink: 0; margin-right:0px; opacity:1;
         @import 'configuration';
         @import 'scale';
         @import 'summary';
