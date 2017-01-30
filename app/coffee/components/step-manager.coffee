@@ -8,15 +8,14 @@ stepManager   = require 'jade/step-manager'
 module.exports = class StepManager
 
   constructor: (@$el, config) ->
-    @isHorizontal = config.category != "data"
+    @isHorizontal = @isHorizontal config.clusterShapeCanBe
     @category     = config.category
-    @isCluster    = config.isCluster
+    @isCluster    = config.topology == 'cluster'
     @bunkHouses   = config.bunkHouses
     @submitCb     = config.submitCb
     @cancelCb     = config.cancelCb
     @componentId  = config.componentId
-    @clusterable  = config.clusterable
-
+    @clusterable  = @isClusterable config.clusterShapeCanBe
     @$node = $ stepManager( {} )
     @$el.append @$node
     @$wrapper = $ '.step-wrapper', @$node
@@ -160,3 +159,8 @@ module.exports = class StepManager
 
     @submitCb data
     PubSub.publish 'SPLITTER.SPLIT', data
+
+  # ------------------------------------ Helpers
+
+  isHorizontal  : (clusterShapeCanBe) -> $.inArray('horizontal', clusterShapeCanBe) != -1
+  isClusterable : (clusterShapeCanBe) -> $.inArray('horizontal', clusterShapeCanBe) != -1 || $.inArray('data-redundant', clusterShapeCanBe) != -1

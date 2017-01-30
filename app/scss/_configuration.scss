@@ -1,37 +1,40 @@
-&.configuration         {
-  @mixin text           { font-style: italic; font-weight:$medium;  font-size:14px; line-height: 20px; }
-  .wrapper              { display:flex; justify-content: space-between; padding:20px 30px;
-    .option             { color:#475961; width: 230px; display:flex; flex-direction:column; align-items: center;
+&.configuration              {
+  @mixin text                {font-style: italic; font-weight:$medium;  font-size:14px; line-height: 20px; }
+  .wrapper                   {display:flex; justify-content: space-between; padding:20px 30px;
+    .option                  {color:#475961; width: 230px; display:flex; flex-direction:column; align-items: center;
       svg line, polygon,
-      polyline          { stroke: #485963; }
-      &.picked          {
-        .icon           { background:#43A7D1;
+      polyline               {stroke: #485963; }
+      &.picked               {
+        .icon                {background:#43A7D1;
           svg line, polygon,
-          polyline      { stroke: #183950; }
-          .check-icon   {
-            .check-mark { display:initial; }
+          polyline           {stroke: #183950; }
+          .check-icon        {
+            .check-mark      {display:initial; }
           }
         }
       }
-      .icon             { position: relative; background:#CDD3D8; display:flex; align-items: center; justify-content: center; width:174px; height:175px; border-radius:50%; cursor:pointer;
-        .check-icon     { position:absolute; bottom:1px; left:16px;
-          .check-mark   { display:none; }
+      .icon                  {position: relative; background:#CDD3D8; display:flex; align-items: center; justify-content: center; width:174px; height:175px; border-radius:50%; cursor:pointer;
+        .check-icon          {position:absolute; bottom:1px; left:16px;
+          .check-mark        {display:none; }
         }
       }
-      .title            { text-transform: uppercase; font-weight: bold; letter-spacing: 0.04em; border-bottom: 1px solid #CECECE; width: 100%; text-align: center; padding: 4px 0; margin: 24px 0 13px; }
-      .blurb            { @include text; }
-      &.disabled        { pointer-events: none; position:relative;
-        &:after         { content: "coming-soon"; background:white; padding:4px 8px; right:22px; top: 115px; position:absolute; color:#7F8499; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; @include drop-shadow(0px, 1px, 3px, #AAA); }
-        *               { opacity: 0.85; }
+      .title                 {text-transform: uppercase; font-weight: bold; letter-spacing: 0.04em; border-bottom: 1px solid #CECECE; width: 100%; text-align: center; padding: 4px 0; margin: 24px 0 13px; }
+      .blurb                 {@include text; }
+      &.disabled             {pointer-events: none; position:relative;
+        &:after              {content: "coming-soon"; background:white; padding:4px 8px; right:22px; top: 115px; position:absolute; color:#7F8499; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; @include drop-shadow(0px, 1px, 3px, #AAA); }
+        *                    {opacity: 0.85; }
       }
     }
-    .radios             { align-self: flex-start; padding: 15px 0 25px;
-      &.inactive        { opacity:0.5; pointer-events: none; }
-      ul                { list-style: none; margin:0; padding:0;
-        li              { @include text; margin:0 0 3px; padding:2px 0; display:flex; font-size:13px; 
-          input         { margin-right:7px; }
-          .txt          {  }
-          select        { margin-left:7px; width:70px; }
+    .radios                  {align-self: flex-start; padding: 15px 0 25px;
+      &.inactive             {opacity:0.5; pointer-events: none; }
+      ul                     {list-style: none; margin:0; padding:0;
+        li                   {@include text; margin:0 0 3px; padding:2px 0; display:flex;
+          .label             {font-size:13px; color:#475961; cursor: pointer; }
+          input              {margin-right:7px; }
+          select             {margin-left:7px; width:70px; }
+          .drop-down-trigger {min-width:initial !important; font-size:14px; margin-left:5px;
+            .txt             {white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100px;}
+          }
         }
       }
     }

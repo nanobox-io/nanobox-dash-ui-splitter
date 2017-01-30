@@ -24,4 +24,15 @@ config =
   submitCb     : onSubmit
   cancelCb     : onCancel
 
-app = new nanobox.Splitter $(".holder-div"), config
+configNew =
+  isCluster         : true
+  componentId       : "74dcb6e8-1e92-4d9b-83e8-5295d56dc5f1"
+  category          : 'data'          # code, data   # (new vals)
+  topology          : 'bunkhouse'     # bunkhouse, cluster
+  clusterShapeIs    : ''              # horizontal, data-single, data-redundant
+  clusterShapeCanBe : ['horizontal']  # horizontal, data-single, data-redundant
+  bunkHouses        : bunkHouses
+  submitCb          : onSubmit
+  cancelCb          : onCancel
+
+app = new nanobox.Splitter $(".holder-div"), configNew

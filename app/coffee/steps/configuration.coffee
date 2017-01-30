@@ -2,11 +2,12 @@ configuration = require 'jade/configuration'
 
 module.exports = class Configuration
 
-  constructor: ($el, @isHorizontal, bunkHouses, clusterable, isCluster, @isExistingHostCb) ->
+  constructor: ($el, @isHorizontal, bunkHouses, @clusterable, @isCluster, @isExistingHostCb) ->
     data   = @getConfig bunkHouses
     @$node = $ configuration(data)
     $el.append @$node
     castShadows @$node
+    lexify @$node
     @$options = $ '.option', @$node
 
     $(".icon", @$node).on "click", (e)=>
@@ -19,23 +20,19 @@ module.exports = class Configuration
       else
         @isExistingHostCb false
 
-
-    @setInitialState (clusterable && !isCluster)
     @selection = $('.option.picked .icon', @$node).attr 'data-id'
 
   init : () ->
+    @setInitialState()
     $(".icon:first", @$node).trigger 'click'
     $("input:radio:first", @$node).trigger 'click'
 
-  setInitialState : (clusterable) ->
+  setInitialState : () ->
     $bunkhouse = $(".option.bunkhouse", @$node)
     $redundant = $(".option.redundant", @$node)
-    if !clusterable
-      $bunkhouse.addClass 'picked'
-      $('.icon', $bunkhouse).trigger 'click'
+    if !@clusterable
       $redundant.remove()
-    else
-      $redundant.addClass 'picked'
+
 
   isBunkhouse : ()-> @selection == 'bunkhouse'
 

@@ -1,12 +1,13 @@
 {
   "name": "splitter",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "dependencies": {
     "jquery": "*",
     "velocity": "~1.1.0",
     "shadow-icons": "tolmark12/shadow-icons-js",
     "scale-machine": "nanobox-io/nanobox-dash-scale-machine",
-    "PubSubJS": "pubsub-js#^1.5.3"
+    "PubSubJS": "pubsub-js#^1.5.3",
+    "lexi": "nanobox-io/lexi"
   },
   "ignore": [
     "app",

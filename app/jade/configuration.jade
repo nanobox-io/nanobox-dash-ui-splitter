@@ -1,4 +1,4 @@
-.step.configuration
+.step.configuration.lexi
   .wrapper
     .option.redundant
       .icon(data-id="cluster")
@@ -20,18 +20,21 @@
           ul
             if isData
               li
-                input(type="radio" name="bunkhaus" value="new-single" checked="checked") 
-                .txt New Single-Component Host
+                label
+                  input(type="radio" name="bunkhaus" value="new-single" checked="checked") 
+                  .txt New Single-Component Host
             li
-              input(type="radio" name="bunkhaus" value="new-multi") 
-              .txt New Multi-component Host
-            li  
-              input(type="radio" name="bunkhaus" value="existing") 
-              .txt Existing Host
+              label
+                input(type="radio" name="bunkhaus" value="new-multi") 
+                .txt New Multi-component Host
+            li
+              label
+                input(type="radio" name="bunkhaus" value="existing") 
+                .txt Existing Host
               select#bunkhaus-picker
                 each haus in bunkHouses
                   if haus.current
                     option(value="#{haus.id}" disabled) #{haus.name} (Current)
                   else
                     option(value="#{haus.id}")=haus.name
-        
+          
