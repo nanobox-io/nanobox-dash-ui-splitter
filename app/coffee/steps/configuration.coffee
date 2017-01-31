@@ -54,13 +54,20 @@ module.exports = class Configuration
       obj.redundantTitle = "Redundant Cluster"
       obj.redundantBlurb = "A primary and secondary instance of your data component plus  a small monitor to sync data state between the two and switch traffic to the secondary if the primary should fail."
 
+    activeBunkHouses = []
+
+    for bunkHouse in bunkHouses
+      if bunkHouse.state == 'active'
+        activeBunkHouses.push bunkHouse
+
+
     obj.bunkHouses = bunkHouses
 
     # If there are no bunkhouses:
-    if bunkHouses.length == 0
+    if activeBunkHouses.length == 0
       obj.showBunkhouseSelector = false
     # else if there are more than one bunkhouse:
-    else if bunkHouses.length > 1
+    else if activeBunkHouses.length > 1
       obj.showBunkhouseSelector = true
     # else there is only one bunkhouse
     else

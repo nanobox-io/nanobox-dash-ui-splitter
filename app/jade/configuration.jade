@@ -15,7 +15,7 @@
           img.shadow-icon(data-src="split-check")    
       .title=singleTitle
       .blurb=singleBlurb
-      if showBunkhouseSelector
+      if 0 == 0
         .radios.inactive
           ul
             if isData
@@ -27,14 +27,15 @@
               label
                 input(type="radio" name="bunkhaus" value="new-multi") 
                 .txt New Multi-component Host
-            li
-              label
-                input(type="radio" name="bunkhaus" value="existing") 
-                .txt Existing Host
-              select#bunkhaus-picker
-                each haus in bunkHouses
-                  if haus.current
-                    option(value="#{haus.id}" disabled) #{haus.name} (Current)
-                  else
-                    option(value="#{haus.id}")=haus.name
-          
+            if showBunkhouseSelector
+              li
+                label
+                  input(type="radio" name="bunkhaus" value="existing") 
+                  .txt Existing Host
+                select#bunkhaus-picker
+                  each haus in bunkHouses
+                    if haus.current
+                      option(value="#{haus.id}" disabled) #{haus.name} (Current)
+                    else
+                      option(value="#{haus.id}")=haus.name
+            
