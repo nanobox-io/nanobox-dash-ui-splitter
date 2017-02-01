@@ -57,7 +57,7 @@ module.exports = class Configuration
     activeBunkHouses = []
 
     for bunkHouse in bunkHouses
-      if bunkHouse.status == 'active'
+      if bunkHouse.state == 'active'
         activeBunkHouses.push bunkHouse
 
 
