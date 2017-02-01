@@ -57,11 +57,11 @@ module.exports = class Configuration
     activeBunkHouses = []
 
     for bunkHouse in bunkHouses
-      if bunkHouse.state == 'active'
+      if bunkHouse.status == 'active'
         activeBunkHouses.push bunkHouse
 
 
-    obj.bunkHouses = bunkHouses
+    obj.bunkHouses = activeBunkHouses
 
     # If there are no bunkhouses:
     if activeBunkHouses.length == 0
@@ -73,7 +73,7 @@ module.exports = class Configuration
     else
       obj.showBunkhouseSelector = true
       # If that one bunkhouse if the bunkhouse we're currently on, don't show it
-      if bunkHouses[0].current
+      if activeBunkHouses[0].current
         obj.showBunkhouseSelector = false
 
     return obj
